@@ -13,6 +13,13 @@
         <logback-version>1.0.6</logback-version>
         <testng-version>5.14.1</testng-version>
         <org.json-version>20090211</org.json-version>
+        <unirest-java-version>1.4.8</unirest-java-version>
+        <httpclient-version>4.5.2</httpclient-version>
+        <httpasyncclient-version>4.1.1</httpasyncclient-version>
+        <httpmime-version>4.5.2</httpmime-version>
+        <httpcore-version>4.4.1</httpcore-version>
+        <maven-shade-plugin-version>1.5</maven-shade-plugin-version>
+        <maven-compiler-plugin-version>3.2</maven-compiler-plugin-version>
     </properties>
 
 
@@ -51,30 +58,58 @@
         <dependency>
             <groupId>com.mashape.unirest</groupId>
             <artifactId>unirest-java</artifactId>
-            <version>1.4.8</version>
+            <version>${unirest-java-version}</version>
         </dependency>
         <dependency>
-          <groupId>org.apache.httpcomponents</groupId>
-          <artifactId>httpclient</artifactId>
-          <version>4.5.2</version>
+            <groupId>org.apache.httpcomponents</groupId>
+            <artifactId>httpclient</artifactId>
+            <version>${httpclient-version}</version>
         </dependency>
         <dependency>
-          <groupId>org.apache.httpcomponents</groupId>
-          <artifactId>httpasyncclient</artifactId>
-          <version>4.1.1</version>
+            <groupId>org.apache.httpcomponents</groupId>
+            <artifactId>httpasyncclient</artifactId>
+            <version>${httpasyncclient-version}</version>
         </dependency>
         <dependency>
-          <groupId>org.apache.httpcomponents</groupId>
-          <artifactId>httpmime</artifactId>
-          <version>4.5.2</version>
+            <groupId>org.apache.httpcomponents</groupId>
+            <artifactId>httpmime</artifactId>
+            <version>${httpmime-version}</version>
         </dependency>
         <dependency>
-        	<groupId>org.apache.httpcomponents</groupId>
-        	<artifactId>httpcore</artifactId>
-        	<version>4.4.1</version>
+            <groupId>org.apache.httpcomponents</groupId>
+            <artifactId>httpcore</artifactId>
+            <version>${httpcore-version}</version>
         </dependency>
-
 
 
     </dependencies>
+
+    <build>
+        <finalName>${project.artifactId}</finalName>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-shade-plugin</artifactId>
+                <version>${maven-shade-plugin-version}</version>
+                <executions>
+                    <execution>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>shade</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>${maven-compiler-plugin-version}</version>
+                <configuration>
+                    <source>1.7</source>
+                    <target>1.7</target>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
 </project>
