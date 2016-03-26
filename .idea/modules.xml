@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/bestbuy-review-retriever.iml" filepath="$PROJECT_DIR$/bestbuy-review-retriever.iml" />
+      <module fileurl="file://$PROJECT_DIR$/bestbuy-reviews-retriever.iml" filepath="$PROJECT_DIR$/bestbuy-reviews-retriever.iml" />
     </modules>
   </component>
 </project>

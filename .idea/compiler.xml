@@ -25,10 +25,12 @@
         <outputRelativeToContentRoot value="true" />
         <processorPath useClasspath="true" />
         <module name="bestbuy-review-retriever" />
+        <module name="bestbuy-reviews-retriever" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="bestbuy-review-retriever" target="1.5" />
+      <module name="bestbuy-reviews-retriever" target="1.5" />
     </bytecodeTargetLevel>
   </component>
 </project>
