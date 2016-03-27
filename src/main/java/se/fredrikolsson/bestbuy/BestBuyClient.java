@@ -14,33 +14,20 @@ import java.util.List;
 /**
  *
  */
-public class BestBuyClient {
+class BestBuyClient {
 
     private static Logger logger = LoggerFactory.getLogger(BestBuyClient.class);
 
         private final String apiKey;
-        // http://api.bestbuy.com/v1/reviews(sku=4447801)?pageSize=100&page=2&format=json&apiKey=p9na65xz3zb3jcqgvg4aqsjy
         private static final String REVIEWS_API_ENDPOINT = "http://api.bestbuy.com/v1/reviews";
         private static final String PRODUCTS_API_ENDPOINT = "http://api.bestbuy.com/v1/products";
 
 
-        public static void main(String ... args) throws Exception {
-            String apiKey = "p9na65xz3zb3jcqgvg4aqsjy";
-            String skuCode = "4447801";
-
-            BestBuyClient client = new BestBuyClient(apiKey);
-            String name = client.getProductName(skuCode);
-            System.out.println("Got name " + name);
-            //List<JSONObject> reviews = client.getReviews(skuCode);
-            //System.out.println("Got " + reviews.size() + " reviews for sku " + skuCode);
-        }
-
-
-        public BestBuyClient(String apiKey) {
+        BestBuyClient(String apiKey) {
             this.apiKey = apiKey;
         }
 
-        public List<JSONObject> getReviews(String skuCode) throws Exception {
+        List<JSONObject> getReviews(String skuCode) throws Exception {
             int currentPage = 1;
             JSONObject response = getReviews(skuCode, currentPage);
 
@@ -63,9 +50,7 @@ public class BestBuyClient {
         }
 
 
-
-        protected JSONObject getReviews(String skuCode, int currentPage) throws Exception {
-            logger.info("Getting reviews for sku: {}, page: {}", skuCode, currentPage);
+        private JSONObject getReviews(String skuCode, int currentPage) throws Exception {
             HttpResponse<JsonNode> response = Unirest.get(getReviewsApiEndpoint()
                     + "(sku={sku})?pageSize=100&page={currentPage}&format=json&apiKey={apiKey}")
                     .routeParam("sku", skuCode)
@@ -98,20 +83,19 @@ public class BestBuyClient {
             if (products != null && products.length() > 0) {
                 result = products.getJSONObject(0).getJSONArray("products").getJSONObject(0).getString("name");
             }
-            logger.info("Got product name for sku {}: \"{}\"", skuCode, result);
             return result;
         }
 
 
-        public String getApiKey() {
+        private String getApiKey() {
             return apiKey;
         }
 
-        public static String getReviewsApiEndpoint() {
+        private static String getReviewsApiEndpoint() {
             return REVIEWS_API_ENDPOINT;
         }
 
-        public static String getProductsApiEndpoint() {
+        private static String getProductsApiEndpoint() {
             return PRODUCTS_API_ENDPOINT;
         }
 }
