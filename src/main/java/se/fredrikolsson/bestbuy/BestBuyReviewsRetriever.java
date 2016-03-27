@@ -60,7 +60,7 @@ public class BestBuyReviewsRetriever {
         for (String skuCode : skuCodes) {
             String productName = client.getProductName(skuCode);
             List<JSONObject> reviews = client.getReviews(skuCode);
-            logger.info("Retrieved {} reviews for sku code {}, product name {}", reviews.size(), skuCode, productName);
+            logger.info("Retrieved {} reviews for sku code {}, product name \"{}\"", reviews.size(), skuCode, productName);
             result.addAll(reviews);
         }
         return result;
