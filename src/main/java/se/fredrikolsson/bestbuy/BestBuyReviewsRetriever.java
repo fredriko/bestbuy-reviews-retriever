@@ -32,7 +32,7 @@ public class BestBuyReviewsRetriever {
 
         String apiKey = args[0];
         String outputCsvDirectory = args[1];
-        List<String> skuCodes = new ArrayList<String>(Arrays.asList(Arrays.copyOfRange(args, 2, args.length)));
+        List<String> skuCodes = new ArrayList<>(Arrays.asList(Arrays.copyOfRange(args, 2, args.length)));
 
         BestBuyReviewsRetriever populator = new BestBuyReviewsRetriever(apiKey);
         File outputFile = populator.createOutputFile(skuCodes, outputCsvDirectory);
@@ -56,10 +56,11 @@ public class BestBuyReviewsRetriever {
 
     private List<JSONObject> retrieveReviews(List<String> skuCodes) throws Exception {
         BestBuyClient client = new BestBuyClient(getApiKey());
-        List<JSONObject> result = new ArrayList<JSONObject>();
+        List<JSONObject> result = new ArrayList<>();
         for (String skuCode : skuCodes) {
+            String productName = client.getProductName(skuCode);
             List<JSONObject> reviews = client.getReviews(skuCode);
-            logger.info("Retrieved {} reviews for sku code {}", reviews.size(), skuCode);
+            logger.info("Retrieved {} reviews for sku code {}, product name {}", reviews.size(), skuCode, productName);
             result.addAll(reviews);
         }
         return result;
